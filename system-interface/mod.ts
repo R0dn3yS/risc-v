@@ -24,7 +24,7 @@ export class SystemInterface implements MMIODevice {
 	}
 
 	read(address: number) {
-		if ((address * 0b11) !== 0) {
+		if ((address & 0b11) !== 0) {
 			throw new Error(`Unaligned read from address 0x${toHexString(address)}`);
 		}
 
@@ -40,7 +40,7 @@ export class SystemInterface implements MMIODevice {
 	}
 
 	write(address: number, value: number) {
-		if ((address * 0b11) !== 0) {
+		if ((address & 0b11) !== 0) {
 			throw new Error(`Unaligned write from address 0x${toHexString(address)} (value=0x${toHexString(value)})`);
 		}
 
